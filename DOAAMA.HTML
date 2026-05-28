@@ -23,7 +23,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* حماية: منع تحديد النصوص */
+        /* حماية إضافية مدمجة: منع تحديد النصوص بالـ CSS */
         * {
             margin: 0; padding: 0; box-sizing: border-box;
             font-family: 'Lemonada', cursive, sans-serif;
@@ -38,7 +38,7 @@
             overflow-x: hidden; position: relative; min-height: 100vh;
         }
 
-        /* الخلفية الثابتة الموحدة لجميع الكورسات */
+        /* الخلفية الثابتة الموحدة */
         .page-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://i.pinimg.com/736x/24/fd/82/24fd826a00797d9380f51861632d1643.jpg');
@@ -51,7 +51,7 @@
             background: rgba(7, 11, 18, 0.92); z-index: -1;
         }
 
-        /* جزيئات الخلفية */
+        /* جزيئات الخلفية الطائرة */
         .particles-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             overflow: hidden; pointer-events: none; z-index: 0;
@@ -117,22 +117,13 @@
         }
 
         .video-wrapper {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border-radius: 16px;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            position: relative; width: 100%; background: #000;
+            border-radius: 16px; overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        /* مشغل الفيديو الداخلي الأصلي للموقع المانع للتحميل الخارجي */
         .video-wrapper video {
-            width: 100%;
-            height: auto;
-            display: block;
-            z-index: 1;
+            width: 100%; height: auto; display: block; z-index: 1;
         }
 
         /* غلاف البداية المخصص (Poster) */
@@ -203,8 +194,8 @@
                     </div>
                 </div>
 
-                <video id="lecture-video" controls controlsList="nodownload" oncontextmenu="return false;">
-                    <source src="https://youtu.be/92y8T3aFKSU" id="youtube-player">
+                <video id="lecture-video" controls controlsList="nodownload">
+                    <source src="رابط_فيديو_الدعامة_المباشر.mp4" type="video/mp4">
                     متصفحك لا يدعم تشغيل الفيديو.
                 </video>
 
@@ -218,54 +209,6 @@
         </div>
     </footer>
 
-    <script>
-        var myVideo = document.getElementById("lecture-video");
-
-        // دالة تشغيل الفيديو عند الضغط على البوستر المخصص
-        function startLocalVideo() {
-            document.getElementById('poster').classList.add('hidden-poster');
-            myVideo.play();
-        }
-
-        // 1. التحكم بـ زر المسطرة (Spacebar) للتشغيل والإيقاف المؤقت للكمبيوتر
-        window.addEventListener('keydown', function(e) {
-            if (e.code === 'Space' || e.keyCode === 32) {
-                e.preventDefault(); // منع نزول الشاشة لأسفل عند الضغط على المسطرة
-                
-                if(document.getElementById('poster').classList.contains('hidden-poster')) {
-                    if (myVideo.paused) {
-                        myVideo.play();
-                    } else {
-                        myVideo.pause();
-                    }
-                } else {
-                    startLocalVideo();
-                }
-            }
-        });
-
-        // 2. النقر المزدوج لتكبير الإطار الخاص لملء الشاشة بالكامل (Fullscreen)
-        var container = document.getElementById('player-container');
-        container.addEventListener('dblclick', function() {
-            if (!document.fullscreenElement) {
-                if (container.requestFullscreen) { container.requestFullscreen(); }
-                else if (container.mozRequestFullScreen) { container.mozRequestFullScreen(); }
-                else if (container.webkitRequestFullscreen) { container.webkitRequestFullscreen(); }
-                else if (container.msRequestFullscreen) { container.msRequestFullscreen(); }
-            } else {
-                if (document.exitFullscreen) { document.exitFullscreen(); }
-            }
-        });
-
-        // === نظام الحماية الفولاذي المانع لـ الفحص والـنسخ وقائمة الفأرة ===
-        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-        document.addEventListener('keydown', function(e) {
-            if (e.keyCode === 123) { e.preventDefault(); return false; }
-            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.code === 'KeyI')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && e.shiftKey && (e.keyCode === 74 || e.code === 'KeyJ')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && e.shiftKey && (e.keyCode === 67 || e.code === 'KeyC')) { e.preventDefault(); return false; }
-            if (e.ctrlKey && (e.keyCode === 85 || e.code === 'KeyU')) { e.preventDefault(); return false; }
-        });
-    </script>
+    <script src="secure-player.js"></script>
 </body>
 </html>
