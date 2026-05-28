@@ -8,52 +8,180 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root { 
-            --bg-gradient: linear-gradient(135deg, #0f0c1b, #201a30, #0f0c1b); 
-            --panel-bg: rgba(255, 255, 255, 0.06); 
-            --panel-border: rgba(255, 255, 255, 0.1); 
+            /* تم تحديث الخلفية لتصبح الصورة المطلوبة */
+            --bg-image: url('https://i.pinimg.com/736x/24/fd/82/24fd826a00797d9380f51861632d1643.jpg');
+            --panel-bg: rgba(0, 0, 0, 0.75); /* تعميق خلفية القوائم لزيادة الوضوح */
+            --panel-border: rgba(255, 255, 255, 0.15); 
             --text-main: #ffffff; 
             --accent-color: #00f2fe; 
-            --accent-glow: rgba(0, 242, 254, 0.4); 
-            --control-btn-bg: rgba(255, 255, 255, 0.1); 
+            --accent-glow: rgba(0, 242, 254, 0.5); 
+            --control-btn-bg: rgba(255, 255, 255, 0.15); 
         }
-        body { background: var(--bg-gradient); display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; color: #fff; overflow: hidden; }
-        .back-btn { position: absolute; top: 20px; right: 20px; background: var(--panel-bg); border: 1px solid var(--panel-border); color: #fff; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-        .back-btn:hover { background: var(--accent-color); color: #000; }
-        .video-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; text-align: center; background: linear-gradient(45deg, #fff, var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .player-container { position: relative; width: 90%; max-width: 850px; aspect-ratio: 16 / 9; background: #000; border-radius: 20px; overflow: hidden; border: 1px solid var(--panel-border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+
+        body { 
+            /* إعدادات الصورة الخلفية */
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* تجعل الخلفية ثابتة عند التمرير إذا وجد */
+            
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* خط أوضح */
+            color: #fff; 
+            overflow: hidden; 
+            position: relative;
+        }
+
+        /* طبقة تعتيم فوق الصورة لتحسين قراءة النصوص */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.4); /* درجة التعتيم */
+            z-index: 0;
+        }
+
+        /* لضمان ظهور المحتوى فوق طبقة التعتيم */
+        .back-btn, .video-title, .player-container {
+            z-index: 1;
+        }
+
+        .back-btn { 
+            position: absolute; 
+            top: 25px; 
+            right: 25px; 
+            background: var(--panel-bg); 
+            border: 1px solid var(--panel-border); 
+            color: #fff; 
+            padding: 12px 24px; /* تكبير البادينج */
+            border-radius: 30px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            font-size: 18px; /* تكبير الخط */
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .back-btn:hover { background: var(--accent-color); color: #000; transform: scale(1.05); }
+
+        .video-title { 
+            font-size: 32px; /* تكبير خط العنوان بشكل كبير */
+            font-weight: 900; 
+            margin-bottom: 30px; 
+            text-align: center; 
+            background: linear-gradient(45deg, #fff, var(--accent-color)); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* ظل للنص لزيادة الوضوح */
+        }
+
+        .player-container { 
+            position: relative; 
+            width: 90%; 
+            max-width: 950px; /* زيادة العرض الأقصى قليلاً */
+            aspect-ratio: 16 / 9; 
+            background: #000; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            border: 2px solid var(--panel-border); /* تمليظ الحدود */
+            box-shadow: 0 25px 60px rgba(0,0,0,0.8); 
+        }
+
         .player-container.hide-controls { cursor: none; }
         .iframe-wrapper { position: absolute; top: -12%; left: 0; width: 100%; height: 124%; pointer-events: none; }
         #youtube-player { width: 100%; height: 100%; }
         .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer; }
-        .custom-poster-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 15; display: flex; justify-content: center; align-items: center; }
+        
+        .custom-poster-cover { 
+            position: absolute; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(8px); /* زيادة الضبابية */
+            -webkit-backdrop-filter: blur(8px); 
+            z-index: 15; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            transition: opacity 0.5s;
+        }
+
         .custom-poster-cover.video-started { opacity: 0; visibility: hidden; pointer-events: none; }
-        .play-image-trigger { width: 80px; height: 80px; cursor: pointer; }
-        .custom-controls { position: absolute; bottom: 0; left: 0; width: 100%; height: 65px; background: var(--panel-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 20; transition: all 0.3s; }
-        .player-container.hide-controls .custom-controls { opacity: 0; transform: translateY(15px); pointer-events: none; }
-        .controls-right, .controls-left { display: flex; align-items: center; gap: 10px; }
+        .play-image-trigger { width: 100px; height: 100px; cursor: pointer; transition: transform 0.3s; } /* تكبير أيقونة التشغيل */
+        .play-image-trigger:hover { transform: scale(1.1); }
+
+        .custom-controls { 
+            position: absolute; 
+            bottom: 0; left: 0; width: 100%; 
+            height: 80px; /* زيادة ارتفاع شريط التحكم */
+            background: var(--panel-bg); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px); 
+            border-top: 1px solid var(--panel-border); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 0 25px; 
+            z-index: 20; 
+            transition: all 0.3s; 
+        }
+
+        .player-container.hide-controls .custom-controls { opacity: 0; transform: translateY(20px); pointer-events: none; }
+        
+        .controls-right, .controls-left { display: flex; align-items: center; gap: 15px; } /* زيادة المسافة */
+        
         .volume-container { display: flex; align-items: center; gap: 5px; position: relative; }
         .volume-slider-wrapper { width: 0px; overflow: hidden; transition: width 0.3s; display: flex; align-items: center; height: 20px; direction: ltr!important; }
-        .volume-container:hover .volume-slider-wrapper, .volume-container.active .volume-slider-wrapper { width: 70px; margin-left: 5px; }
-        .volume-slider { width: 100%; height: 5px; background: var(--control-btn-bg); border-radius: 5px; cursor: pointer; position: relative; }
-        .volume-filled { height: 100%; background: var(--accent-color); width: 100%; border-radius: 5px; }
-        .control-btn { background: var(--control-btn-bg); border: 1px solid var(--panel-border); color: var(--text-main); font-size: 14px; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .control-btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
-        .progress-container { flex-grow: 1; margin: 0 15px; display: flex; align-items: center; position: relative; cursor: pointer; height: 20px; direction: ltr!important; }
-        .progress-bar { width: 100%; height: 5px; background: var(--control-btn-bg); border-radius: 10px; position: relative; }
-        .progress-filled { height: 100%; background: var(--accent-color); width: 0%; border-radius: 10px; }
+        .volume-container:hover .volume-slider-wrapper, .volume-container.active .volume-slider-wrapper { width: 80px; margin-left: 10px; }
+        .volume-slider { width: 100%; height: 6px; background: var(--control-btn-bg); border-radius: 5px; cursor: pointer; position: relative; }
+        .volume-filled { height: 100%; background: var(--accent-color); width: 100%; border-radius: 5px; box-shadow: 0 0 10px var(--accent-glow); }
+        
+        .control-btn { 
+            background: var(--control-btn-bg); 
+            border: 1px solid var(--panel-border); 
+            color: var(--text-main); 
+            font-size: 18px; /* تكبير حجم الأيقونات داخل الأزرار */
+            width: 45px; /* تكبير الأزرار */
+            height: 45px; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.2s;
+        }
+
+        .control-btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 20px var(--accent-glow); transform: translateY(-2px); }
+        
+        .progress-container { flex-grow: 1; margin: 0 20px; display: flex; align-items: center; position: relative; cursor: pointer; height: 25px; direction: ltr!important; }
+        .progress-bar { width: 100%; height: 7px; background: var(--control-btn-bg); border-radius: 10px; position: relative; } /* تسميك شريط التقدم */
+        .progress-filled { height: 100%; background: var(--accent-color); width: 0%; border-radius: 10px; box-shadow: 0 0 10px var(--accent-glow); }
     </style>
 </head>
 <body>
+    <!-- زر العودة (تم تكبيره) -->
     <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للمكتبة</a>
+    
+    <!-- العنوان (تم تكبيره وتحسين وضوحه) -->
     <div class="video-title">الباب الأول: مراجعة الدعامة والحركة بالكامل</div>
     
     <div class="player-container" id="main-player-container">
+        <!-- البوستر (تم زيادة التشويش والزر) -->
         <div class="custom-poster-cover" id="custom-poster">
             <img src="play.png" alt="Play" class="play-image-trigger" id="img-start-trigger" />
         </div>
         <div class="video-overlay" id="vid-mask"></div>
         <div class="iframe-wrapper"><div id="youtube-player"></div></div>
         
+        <!-- شريط التحكم (تم تكبيره وتكبير أزراره) -->
         <div class="custom-controls" id="controls-panel">
             <div class="controls-right">
                 <button class="control-btn" id="play-pause-btn"><i class="fas fa-play"></i></button>
