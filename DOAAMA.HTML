@@ -3,226 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الباب الأول: الدعامة والحركة - Vector Biology</title>
-    
-    <link rel="icon" type="image/png" href="https://yt3.ggpht.com/97m8znd6AbHXxbpdPQpvv5Uo9u4Uw9Qsw_dW9GGvx95_JdSYybDCW2O4_ubxG-usaBSdvPzMXg=s160-c-k-c0x00ffffff-no-rj">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300..700&display=swap" rel="stylesheet">
-    
+    <title>لباب الأول: الدعامة والحركة - Vector Biology</title>
+    <link rel="icon" type="image/jpeg" href="https://yt3.ggpht.com/97m8znd6AbHXxbpdPQpvv5Uo9u4Uw9Qsw_dW9GGvx95_JdSYybDCW2O4_ubxG-usaBSdvPzMXg=s160-c-k-c0x00ffffff-no-rj">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        :root {
-            --bg-dark: #070b12;
-            --neon-blue: #00f2fe;
-            --neon-green: #4ece3d;
-            --text-color: #ffffff;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-        }
-
-        /* منع تحديد النصوص بالـ CSS */
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Lemonada', cursive, sans-serif;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-        }
-
-        body {
-            background-color: var(--bg-dark); color: var(--text-color);
-            overflow-x: hidden; position: relative; min-height: 100vh;
-        }
-
-        /* الخلفية الثابتة الموحدة */
-        .page-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('https://i.pinimg.com/736x/24/fd/82/24fd826a00797d9380f51861632d1643.jpg');
-            background-size: cover; background-position: center; background-repeat: no-repeat;
-            z-index: -2;
-        }
-
-        .bg-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(7, 11, 18, 0.93); z-index: -1;
-        }
-
-        /* جزيئات الخلفية المتحركة */
-        .particles-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; pointer-events: none; z-index: 0;
-        }
-
-        .atom {
-            position: absolute; background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(1px); border: 1px solid rgba(0, 242, 254, 0.15);
-            border-radius: 50%; animation: floatAtoms 15s infinite linear;
-        }
-
-        .atom.c1 { width: 60px; height: 60px; top: 15%; left: 5%; border-color: rgba(0, 242, 254, 0.2); }
-        .atom.c2 { width: 80px; height: 80px; top: 75%; left: 85%; border-color: rgba(78, 206, 61, 0.2); animation-duration: 18s; }
-
-        @keyframes floatAtoms {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-30px) rotate(180deg); opacity: 0.6; }
-            100% { transform: translateY(0) rotate(360deg); opacity: 0.3; }
-        }
-
-        /* شريط التنقل */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 8%; background: rgba(7, 11, 18, 0.9);
-            border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000;
-        }
-
-        .logo { font-size: 22px; font-weight: bold; color: var(--neon-blue); }
-        .logo span { color: var(--neon-green); }
-        .nav-links a { color: var(--text-color); text-decoration: none; font-size: 13px; transition: 0.3s; }
-        .nav-links a:hover { color: var(--neon-blue); }
-
-        /* حاوية المحتوى وعرض الدرس */
-        .main-container {
-            max-width: 1000px; margin: 40px auto 100px auto; padding: 0 20px;
-            position: relative; z-index: 2; text-align: center;
-        }
-
-        .lecture-title {
-            font-size: 2rem; font-weight: 700; margin-bottom: 10px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-
-        .lecture-info { color: #8b949e; font-size: 13px; margin-bottom: 40px; }
-
-        /* الإطار الزجاجي الخاص بالموقع */
-        .custom-player-frame {
-            position: relative;
-            background: rgba(13, 20, 34, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 2px solid var(--glass-border);
-            border-radius: 24px;
-            padding: 12px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            transition: 0.4s ease;
-        }
-
-        .custom-player-frame:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 242, 254, 0.15);
-        }
-
-        .video-wrapper {
-            position: relative; width: 100%; padding-bottom: 56.25%; /* 16:9 */
-            background: #000; border-radius: 16px; overflow: hidden;
-        }
-
-        .video-wrapper iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
-        }
-
-        /* --- درع الأمان الشفاف المانع لفتح يوتيوب خارجياً أو الضغط على العناوين العلوبة --- */
-        .video-secure-shield {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 65px;
-            z-index: 5;
-            background: transparent;
-            pointer-events: auto; /* يحجز النقرات في الأعلى تماماً ويحمي الفيديو */
-        }
-
-        /* غلاف البداية المخصص (Poster) بصورة play.png */
-        .video-poster {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url('play.png'); background-size: cover; background-position: center;
-            z-index: 10; display: flex; justify-content: center; align-items: center;
-            cursor: pointer; transition: opacity 0.5s ease, visibility 0.5s;
-        }
-
-        .video-poster::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); transition: 0.3s;
-        }
-
-        .play-custom-btn {
-            position: relative; z-index: 11; width: 85px; height: 85px;
-            background: rgba(7, 11, 18, 0.9); border: 2px solid var(--neon-blue);
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            font-size: 30px; color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .video-poster:hover .play-custom-btn {
-            transform: scale(1.12); color: var(--neon-green);
-            border-color: var(--neon-green); box-shadow: 0 0 30px var(--neon-green);
-        }
-
-        .video-poster.hidden-poster { opacity: 0; visibility: hidden; pointer-events: none; }
-
-        footer { margin-top: auto; position: relative; background: rgba(7, 11, 18, 0.95); padding: 30px 8% 20px 8%; text-align: center; border-top: 1px solid var(--glass-border); z-index: 2; }
-        .copy-right { font-size: 11px; color: #8b949e; }
-
-        @media (max-width: 768px) {
-            .lecture-title { font-size: 1.4rem; }
-            .custom-player-frame { padding: 6px; border-radius: 16px; }
-            .play-custom-btn { width: 65px; height: 65px; font-size: 22px; }
-            .video-secure-shield { height: 45px; }
-        }
+        :root { --bg-gradient: linear-gradient(135deg, #0f0c1b, #201a30, #0f0c1b); --panel-bg: rgba(255, 255, 255, 0.06); --panel-border: rgba(255, 255, 255, 0.1); --text-main: #ffffff; --accent-color: #00f2fe; --accent-glow: rgba(0, 242, 254, 0.4); --control-btn-bg: rgba(255, 255, 255, 0.1); }
+        body { background: var(--bg-gradient); display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; color: #fff; overflow: hidden; }
+        .back-btn { position: absolute; top: 20px; right: 20px; background: var(--panel-bg); border: 1px solid var(--panel-border); color: #fff; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .back-btn:hover { background: var(--accent-color); color: #000; }
+        .video-title { font-size: 20px; font-weight: 800; margin-bottom: 20px; text-align: center; background: linear-gradient(45deg, #fff, var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .player-container { position: relative; width: 90%; max-width: 850px; aspect-ratio: 16 / 9; background: #000; border-radius: 20px; overflow: hidden; border: 1px solid var(--panel-border); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .player-container.hide-controls { cursor: none; }
+        .iframe-wrapper { position: absolute; top: -12%; left: 0; width: 100%; height: 124%; pointer-events: none; }
+        #youtube-player { width: 100%; height: 100%; }
+        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer; }
+        .custom-poster-cover { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); z-index: 15; display: flex; justify-content: center; align-items: center; }
+        .custom-poster-cover.video-started { opacity: 0; visibility: hidden; pointer-events: none; }
+        .play-image-trigger { width: 80px; height: 80px; cursor: pointer; }
+        .custom-controls { position: absolute; bottom: 0; left: 0; width: 100%; height: 65px; background: var(--panel-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--panel-border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 20; transition: all 0.3s; }
+        .player-container.hide-controls .custom-controls { opacity: 0; transform: translateY(15px); pointer-events: none; }
+        .controls-right, .controls-left { display: flex; align-items: center; gap: 10px; }
+        .volume-container { display: flex; align-items: center; gap: 5px; position: relative; }
+        .volume-slider-wrapper { width: 0px; overflow: hidden; transition: width 0.3s; display: flex; align-items: center; height: 20px; direction: ltr!important; }
+        .volume-container:hover .volume-slider-wrapper, .volume-container.active .volume-slider-wrapper { width: 70px; margin-left: 5px; }
+        .volume-slider { width: 100%; height: 5px; background: var(--control-btn-bg); border-radius: 5px; cursor: pointer; position: relative; }
+        .volume-filled { height: 100%; background: var(--accent-color); width: 100%; border-radius: 5px; }
+        .control-btn { background: var(--control-btn-bg); border: 1px solid var(--panel-border); color: var(--text-main); font-size: 14px; width: 38px; height: 38px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .control-btn:hover { background: var(--accent-color); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
+        .progress-container { flex-grow: 1; margin: 0 15px; display: flex; align-items: center; position: relative; cursor: pointer; height: 20px; direction: ltr!important; }
+        .progress-bar { width: 100%; height: 5px; background: var(--control-btn-bg); border-radius: 10px; position: relative; }
+        .progress-filled { height: 100%; background: var(--accent-color); width: 0%; border-radius: 10px; }
     </style>
 </head>
 <body>
-
-    <div class="page-bg"></div>
-    <div class="bg-overlay"></div>
-
-    <div class="particles-container">
-        <div class="atom c1"></div>
-        <div class="atom c2"></div>
-    </div>
-
-    <nav>
-        <div class="logo">فيكتور <span>بيولوجي</span> 🧬</div>
-        <div class="nav-links">
-            <a href="Courses.HTML"><i class="fas fa-arrow-right"></i> العودة للكورسات</a>
-        </div>
-    </nav>
-
-    <main class="main-container">
-        <h1 class="lecture-title">الباب الأول: مراجعة الدعامة والحركة بالكامل</h1>
-        <p class="lecture-info"><i class="far fa-clock"></i> مدة المحاضرة: 5 ساعات كاملة من الشرح والتحليل الفخم</p>
-
-        <div class="custom-player-frame" id="player-container">
-            <div class="video-wrapper">
-
-                <div class="video-secure-shield"></div>
-
-                <div class="video-poster" id="poster" onclick="startLocalVideo()">
-                    <div class="play-custom-btn">
-                        <i class="fas fa-play"></i>
-                    </div>
+    <a href="index.html" class="back-btn"><i class="fas fa-arrow-right"></i> العودة للمكتبة</a>
+    <div class="video-title">أالباب الأول: مراجعة الدعامة والحركة بالكامل</div>
+    <div class="player-container" id="main-player-container">
+        <div class="custom-poster-cover" id="custom-poster"><img src="play.png" alt="Play" class="play-image-trigger" id="img-start-trigger" /></div>
+        <div class="video-overlay" id="vid-mask"></div>
+        <div class="iframe-wrapper"><div id="youtube-player"></div></div>
+        <div class="custom-controls" id="controls-panel">
+            <div class="controls-right">
+                <button class="control-btn" id="play-pause-btn"><i class="fas fa-play"></i></button>
+                <div class="volume-container" id="vol-zone">
+                    <button class="control-btn" id="mute-btn"><i class="fas fa-volume-up"></i></button>
+                    <div class="volume-slider-wrapper"><div class="volume-slider" id="volume-timeline"><div class="volume-filled" id="volume-current"></div></div></div>
                 </div>
-
-                <iframe id="lecture-video" 
-                        src="https://www.youtube.com/embed/92y8T3aFKSU?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3" 
-                        title="Secure Lecture Player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
-
             </div>
-        </div>
-    </main>
+            <div class="progress-container" id="progress-timeline"><div class="progress-bar"><div class="progress-filled" id="progress-current"></div></div></div>
+            <div class="controls-left"><button class="control-btn" id="fullscreen-btn"><i class="fas fa-expand"></i></button></div>
+        </div>                
+    </div>
+<script>
+        // 1. جلب بيانات المستخدم الحالية
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let userCode = localStorage.getItem('currentUserCode') || '7L-STUDENT';
+        
+        // 2. تحديد اسم الفيديو الحالي بناءً على اسم الملف تلقائياً
+        const videoId = window.location.pathname.split('/').pop().replace('-player.html', '');
+        const isAllowedLocally = sessionStorage.getItem('allow_' + videoId);
 
-    <footer>
-        <div class="copy-right">
-            <p>© 2026 جميع الحقوق محفوظة لمنصة فيكتور بيولوجي</p>
-        </div>
-    </footer>
+        // 3. فحص الحماية الشامل (المحلي والـ LocalStorage)
+        // لو الطالب مش معاه التوكن المؤقت، ومش متسجل في المتصفح إنه شاري الفيديو.. اطرده فوراً
+        if (!isAllowedLocally && (!currentUser || !currentUser.purchasedVideos || !currentUser.purchasedVideos.includes(videoId))) { 
+            alert('❌ عذراً! لم تقم بشراء هذا المقطع بعد أو غير مسموح لك بالفتح المباشر!'); 
+            window.location.href = 'index.html'; 
+        }
 
+        // معرف فيديو اليوتيوب الخاص بك
+        const currentVideoId = '92y8T3aFKSU';
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="secure-player.js"></script>
 </body>
 </html>
