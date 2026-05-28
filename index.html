@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vector Biology - دكتور محمود سعد</title>
-    <!-- استدعاء مكتبة Font Awesome لأيقونات السوشيال ميديا -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* إعدادات الألوان العامة */
+        /* إعدادات الألوان العامة والتمرير الناعم */
         :root {
             --bg-dark: #070b12;
             --neon-blue: #00f2fe;
@@ -15,6 +14,11 @@
             --text-color: #ffffff;
             --glass-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
+        }
+
+        /* تفعيل التمرير الناعم للموقع بالكامل */
+        html {
+            scroll-behavior: smooth;
         }
 
         * {
@@ -28,6 +32,73 @@
             background-color: var(--bg-dark);
             color: var(--text-color);
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- حاوية الجزيئات والخلايا المتحركة في الخلفية --- */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none; /* تضمن عدم إعاقة الضغط على الأزرار */
+            z-index: 1; /* فوق الفيديوهات وتحت النصوص */
+        }
+
+        .cell {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            border-radius: 50%;
+            animation: floatParticles 15s infinite linear;
+        }
+
+        .cell.style-1 {
+            width: 70px;
+            height: 70px;
+            top: 15%;
+            left: 7%;
+            border-color: rgba(0, 242, 254, 0.25);
+            animation-duration: 18s;
+        }
+
+        .cell.style-2 {
+            width: 45px;
+            height: 45px;
+            top: 65%;
+            left: 85%;
+            border-color: rgba(78, 206, 61, 0.25);
+            animation-duration: 14s;
+            animation-delay: 2s;
+        }
+
+        .cell.style-3 {
+            width: 90px;
+            height: 90px;
+            top: 40%;
+            left: 75%;
+            border-color: rgba(0, 242, 254, 0.15);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* شكل خلية حيوانية */
+            animation-duration: 22s;
+        }
+
+        .cell.style-4 {
+            width: 55px;
+            height: 55px;
+            top: 80%;
+            left: 15%;
+            border-color: rgba(78, 206, 61, 0.2);
+            animation-duration: 16s;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatParticles {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-50px) translateX(30px) rotate(180deg); opacity: 0.6; }
+            100% { transform: translateY(0) translateX(0) rotate(360deg); opacity: 0.3; }
         }
 
         /* شريط التنقل العلوي */
@@ -36,7 +107,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 20px 8%;
-            background: rgba(7, 11, 18, 0.8);
+            background: rgba(7, 11, 18, 0.85);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--glass-border);
@@ -83,6 +154,19 @@
             display: flex;
             align-items: center;
             overflow: hidden;
+            /* تأثير ظهور القسم بالكامل عند التمرير */
+            view-timeline-name: --sectionFade;
+            view-timeline-axis: block;
+            animation-timeline: --sectionFade;
+            animation-name: sectionShow;
+            animation-range: entry 10% cover 40%;
+            animation-fill-mode: both;
+            z-index: 2;
+        }
+
+        @keyframes sectionShow {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .bg-video {
@@ -104,11 +188,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(7, 11, 18, 0.75); /* طبقة تعتيم فوق الفيديو ليتضح الكلام */
+            background: rgba(7, 11, 18, 0.75);
             z-index: -1;
         }
 
         /* --- القسم الأول --- */
+        #home {
+            animation: none; /* يظهر مباشرة عند الفتح */
+        }
+
         .hero-container {
             display: flex;
             justify-content: space-between;
@@ -120,6 +208,12 @@
         .hero-right {
             flex: 1;
             max-width: 55%;
+            animation: slideRight 1.2s ease-out forwards;
+        }
+
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .hero-right h1 {
@@ -143,6 +237,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            animation: slideLeft 1.2s ease-out forwards;
+        }
+
+        @keyframes slideLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .hero-left img {
@@ -152,7 +252,6 @@
             animation: floatAnimation 4s ease-in-out infinite;
         }
 
-        /* أنيميشن حركة الصورة أعلى وأسفل */
         @keyframes floatAnimation {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
@@ -164,20 +263,6 @@
             width: 100%;
             text-align: center;
             padding: 0 20px;
-        }
-
-        /* أنيميشن تحريك نص الدكتور */
-        .moving-text-box {
-            animation: slideUpFade 1.5s ease-out forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes slideUpFade {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .doctor-container h2 {
@@ -204,9 +289,16 @@
 
         /* --- القسم الثالث --- */
         .courses-section {
-            padding: 100px 8%;
+            padding: 120px 8%;
             text-align: center;
             background: linear-gradient(to bottom, var(--bg-dark), #0c121e);
+            view-timeline-name: --coursesFade;
+            view-timeline-axis: block;
+            animation-timeline: --coursesFade;
+            animation-name: sectionShow;
+            animation-range: entry 10% cover 40%;
+            animation-fill-mode: both;
+            z-index: 2;
         }
 
         .courses-section h2 {
@@ -245,9 +337,9 @@
             padding: 60px 8% 30px 8%;
             text-align: center;
             border-top: 2px solid var(--glass-border);
+            z-index: 2;
         }
 
-        /* طبقة داكنة فوق خلفية الفوتر لضمان وضوح الأيقونات */
         footer::before {
             content: '';
             position: absolute;
@@ -294,20 +386,8 @@
             transition: 0.3s all ease;
         }
 
-        /* ألوان وهوفر السوشيال ميديا */
-        .social-icon.youtube:hover {
-            background: #ff0000;
-            color: #fff;
-            box-shadow: 0 0 15px #ff0000;
-            border-color: #ff0000;
-        }
-
-        .social-icon.telegram:hover {
-            background: #0088cc;
-            color: #fff;
-            box-shadow: 0 0 15px #0088cc;
-            border-color: #0088cc;
-        }
+        .social-icon.youtube:hover { background: #ff0000; color: #fff; box-shadow: 0 0 15px #ff0000; border-color: #ff0000; }
+        .social-icon.telegram:hover { background: #0088cc; color: #fff; box-shadow: 0 0 15px #0088cc; border-color: #0088cc; }
 
         .social-icon span {
             font-size: 12px;
@@ -325,10 +405,7 @@
             align-items: center;
         }
 
-        .social-link-wrapper:hover span {
-            opacity: 1;
-            bottom: -20px;
-        }
+        .social-link-wrapper:hover span { opacity: 1; bottom: -20px; }
 
         .copy-right {
             font-size: 14px;
@@ -337,32 +414,36 @@
             padding-top: 20px;
         }
 
-        /* تحسين التجاوب مع الشاشات الصغيرة */
         @media (max-width: 768px) {
             .hero-container { flex-direction: column; text-align: center; gap: 40px; }
             .hero-right { max-width: 100%; }
             .hero-right h1 { font-size: 2.3rem; }
             .doctor-container h2 { font-size: 2.2rem; }
             .doctor-container h3 { font-size: 1.4rem; }
-            .nav-links { display: none; } /* لإضافة قائمة موبايل لاحقاً */
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط التنقل العلوي -->
+    <div class="particles-container">
+        <div class="cell style-1"></div>
+        <div class="cell style-2"></div>
+        <div class="cell style-3"></div>
+        <div class="cell style-4"></div>
+    </div>
+
     <nav>
         <div class="logo">فيكتور <span>بيولوجي</span> 🧬</div>
         <ul class="nav-links">
-            <li><a href="#" class="active">الرئيسية</a></li>
-            <li><a href="Courses.HTML">الكورسات</a></li>
-            <li><a href="#">المذكرات</a></li>
-            <li><a href="#">تواصل معنا</a></li>
+            <li><a href="#home" class="active">الرئيسية</a></li>
+            <li><a href="#about">عن الدكتور</a></li>
+            <li><a href="#courses">الكورسات</a></li>
+            <li><a href="Courses.HTML">تصفح مباشرة</a></li>
         </ul>
     </nav>
 
-    <!-- القسم الأول: الشاشة الافتتاحية بالفيديو والصورة المتحركة -->
-    <section class="video-section">
+    <section class="video-section" id="home">
         <video class="bg-video" autoplay loop muted playsinline>
             <source src="BACK.mp4" type="video/mp4">
         </video>
@@ -378,15 +459,14 @@
         </div>
     </section>
 
-    <!-- القسم الثاني: قسم التعريف بالدكتور محمود سعد -->
-    <section class="video-section">
+    <section class="video-section" id="about">
         <video class="bg-video" autoplay loop muted playsinline>
             <source src="VID2.mp4" type="video/mp4">
         </video>
         <div class="video-overlay"></div>
 
         <div class="doctor-container">
-            <div class="moving-text-box">
+            <div>
                 <h2>دكتور محمود سعد</h2>
                 <h3>مؤلف كتاب البرهان والدليل للصفوف الثانوية الثلاثة</h3>
                 <p>صاحب الخبرة الطويلة في تبسيط أعمق تفاصيل منهج الأحياء والجيولوجيا. نعتمد على أسلوب الشرح المبسط المبني على الفهم والربط بين الأفكار، مع متابعة دورية مستمرة واختبارات تفاعلية تضمن لك التميز وتقفيل المادة في الثانوية العامة بكل سهولة.</p>
@@ -394,19 +474,16 @@
         </div>
     </section>
 
-    <!-- القسم الثالث: قسم الكورسات -->
-    <section class="courses-section">
+    <section class="courses-section" id="courses">
         <h2>تصفح الكورسات المتاحة</h2>
         <a href="Courses.HTML" class="course-btn">انتقل إلى صفحة الكورسات</a>
     </section>
 
-    <!-- الفوتر مع روابط السوشيال ميديا والخلفية المطلوبة -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">فيكتور <span>بيولوجي</span></div>
             
             <div class="social-links">
-                <!-- رابط اليوتيوب -->
                 <div class="social-link-wrapper">
                     <a href="https://www.youtube.com/@dr.mahmoudsaadvector" target="_blank" class="social-icon youtube">
                         <i class="fab fa-youtube"></i>
@@ -414,7 +491,6 @@
                     <span>يوتيوب</span>
                 </div>
                 
-                <!-- رابط قناة التيليجرام الأساسية -->
                 <div class="social-link-wrapper">
                     <a href="https://t.me/ALAAGODA30" target="_blank" class="social-icon telegram">
                         <i class="fab fa-telegram-plane"></i>
@@ -422,7 +498,6 @@
                     <span>القناة الأساسية</span>
                 </div>
 
-                <!-- رابط جروب التيليجرام -->
                 <div class="social-link-wrapper">
                     <a href="https://t.me/+Pz7rJ0MYGVI5ZWE0" target="_blank" class="social-icon telegram">
                         <i class="fas fa-users"></i>
