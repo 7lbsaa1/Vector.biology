@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vector Biology - دكتور محمود سعد</title>
+    
+    <!-- إضافة أيقونة الموقع في التبويب (Favicon) -->
+    <link rel="icon" type="image/png" href="https://yt3.ggpht.com/97m8znd6AbHXxbpdPQpvv5Uo9u4Uw9Qsw_dW9GGvx95_JdSYybDCW2O4_ubxG-usaBSdvPzMXg=s160-c-k-c0x00ffffff-no-rj">
+    
+    <!-- استدعاء خط Lemonada من Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- استدعاء مكتبة Font Awesome لأيقونات السوشيال ميديا -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* إعدادات الألوان العامة والتمرير الناعم */
+        /* إعدادات الألوان العامة والتمرير الناعم والخط الجديد */
         :root {
             --bg-dark: #070b12;
             --neon-blue: #00f2fe;
@@ -16,16 +27,17 @@
             --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* تفعيل التمرير الناعم للموقع بالكامل */
+        /* تفعيل التمرير الناعم للموقع */
         html {
             scroll-behavior: smooth;
         }
 
+        /* تطبيق خط Lemonada على جميع العناصر */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Lemonada', cursive, sans-serif;
         }
 
         body {
@@ -43,8 +55,8 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            pointer-events: none; /* تضمن عدم إعاقة الضغط على الأزرار */
-            z-index: 1; /* فوق الفيديوهات وتحت النصوص */
+            pointer-events: none;
+            z-index: 1;
         }
 
         .cell {
@@ -81,7 +93,7 @@
             top: 40%;
             left: 75%;
             border-color: rgba(0, 242, 254, 0.15);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* شكل خلية حيوانية */
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
             animation-duration: 22s;
         }
 
@@ -117,7 +129,7 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             color: var(--neon-blue);
             text-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
@@ -130,13 +142,13 @@
         .nav-links {
             list-style: none;
             display: flex;
-            gap: 30px;
+            gap: 25px;
         }
 
         .nav-links a {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             transition: 0.3s;
         }
@@ -146,7 +158,7 @@
             text-shadow: 0 0 8px var(--neon-blue);
         }
 
-        /* تنسيق عام لأقسام الخلفية الفيديو */
+        /* أقسام الخلفية الفيديو */
         .video-section {
             position: relative;
             height: 100vh;
@@ -154,7 +166,6 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            /* تأثير ظهور القسم بالكامل عند التمرير */
             view-timeline-name: --sectionFade;
             view-timeline-axis: block;
             animation-timeline: --sectionFade;
@@ -194,7 +205,7 @@
 
         /* --- القسم الأول --- */
         #home {
-            animation: none; /* يظهر مباشرة عند الفتح */
+            animation: none;
         }
 
         .hero-container {
@@ -217,9 +228,9 @@
         }
 
         .hero-right h1 {
-            font-size: 3.5rem;
-            line-height: 1.4;
-            font-weight: 800;
+            font-size: 2.2rem;
+            line-height: 1.8;
+            font-weight: 700;
         }
 
         .hero-right h1 .highlight-blue {
@@ -246,7 +257,7 @@
         }
 
         .hero-left img {
-            max-width: 400px;
+            max-width: 380px;
             width: 100%;
             height: auto;
             animation: floatAnimation 4s ease-in-out infinite;
@@ -266,24 +277,26 @@
         }
 
         .doctor-container h2 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--neon-blue);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+            font-weight: 700;
         }
 
         .doctor-container h3 {
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             color: var(--neon-green);
-            margin-bottom: 25px;
+            margin-bottom: 30px;
             font-weight: 600;
+            line-height: 1.8;
         }
 
         .doctor-container p {
-            font-size: 1.3rem;
-            max-width: 800px;
+            font-size: 1.1rem;
+            max-width: 850px;
             margin: 0 auto;
-            line-height: 1.8;
+            line-height: 2;
             color: #ced4da;
         }
 
@@ -302,17 +315,18 @@
         }
 
         .courses-section h2 {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             margin-bottom: 40px;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            font-weight: 700;
         }
 
         .course-btn {
             display: inline-block;
-            padding: 15px 45px;
-            font-size: 20px;
+            padding: 15px 40px;
+            font-size: 16px;
             font-weight: bold;
             color: #000;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
@@ -354,7 +368,7 @@
         }
 
         .footer-logo {
-            font-size: 26px;
+            font-size: 22px;
             font-weight: bold;
             color: #fff;
             margin-bottom: 30px;
@@ -390,12 +404,13 @@
         .social-icon.telegram:hover { background: #0088cc; color: #fff; box-shadow: 0 0 15px #0088cc; border-color: #0088cc; }
 
         .social-icon span {
-            font-size: 12px;
+            font-size: 11px;
             position: absolute;
-            bottom: -25px;
+            bottom: -30px;
             color: #ced4da;
             opacity: 0;
             transition: 0.3s;
+            white-space: nowrap;
         }
 
         .social-link-wrapper {
@@ -405,10 +420,10 @@
             align-items: center;
         }
 
-        .social-link-wrapper:hover span { opacity: 1; bottom: -20px; }
+        .social-link-wrapper:hover span { opacity: 1; bottom: -25px; }
 
         .copy-right {
-            font-size: 14px;
+            font-size: 12px;
             color: #8b949e;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 20px;
@@ -417,15 +432,16 @@
         @media (max-width: 768px) {
             .hero-container { flex-direction: column; text-align: center; gap: 40px; }
             .hero-right { max-width: 100%; }
-            .hero-right h1 { font-size: 2.3rem; }
-            .doctor-container h2 { font-size: 2.2rem; }
-            .doctor-container h3 { font-size: 1.4rem; }
+            .hero-right h1 { font-size: 1.6rem; }
+            .doctor-container h2 { font-size: 1.8rem; }
+            .doctor-container h3 { font-size: 1.1rem; }
             .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <!-- جزيئات الخلفية الطائرة -->
     <div class="particles-container">
         <div class="cell style-1"></div>
         <div class="cell style-2"></div>
@@ -433,16 +449,17 @@
         <div class="cell style-4"></div>
     </div>
 
+    <!-- شريط التنقل العلوي -->
     <nav>
         <div class="logo">فيكتور <span>بيولوجي</span> 🧬</div>
         <ul class="nav-links">
             <li><a href="#home" class="active">الرئيسية</a></li>
             <li><a href="#about">عن الدكتور</a></li>
             <li><a href="#courses">الكورسات</a></li>
-            <li><a href="Courses.HTML">تصفح مباشرة</a></li>
         </ul>
     </nav>
 
+    <!-- القسم الأول -->
     <section class="video-section" id="home">
         <video class="bg-video" autoplay loop muted playsinline>
             <source src="BACK.mp4" type="video/mp4">
@@ -459,6 +476,7 @@
         </div>
     </section>
 
+    <!-- القسم الثاني -->
     <section class="video-section" id="about">
         <video class="bg-video" autoplay loop muted playsinline>
             <source src="VID2.mp4" type="video/mp4">
@@ -474,11 +492,13 @@
         </div>
     </section>
 
+    <!-- القسم الثالث -->
     <section class="courses-section" id="courses">
         <h2>تصفح الكورسات المتاحة</h2>
         <a href="Courses.HTML" class="course-btn">انتقل إلى صفحة الكورسات</a>
     </section>
 
+    <!-- الفوتر -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">فيكتور <span>بيولوجي</span></div>
