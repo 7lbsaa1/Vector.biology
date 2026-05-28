@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>الباب الأول: الدعامة والحركة - Vector Biology</title>
     
+    <!-- أيقونة الموقع في التبويب (Favicon) -->
     <link rel="icon" type="image/png" href="https://yt3.ggpht.com/97m8znd6AbHXxbpdPQpvv5Uo9u4Uw9Qsw_dW9GGvx95_JdSYybDCW2O4_ubxG-usaBSdvPzMXg=s160-c-k-c0x00ffffff-no-rj">
     
+    <!-- استدعاء خط Lemonada من Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lemonada:wght@300..700&display=swap" rel="stylesheet">
     
+    <!-- استدعاء مكتبة Font Awesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -23,7 +26,7 @@
             --glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* حماية إضافية: منع تحديد النصوص في الصفحة بأكملها */
+        /* حماية إضافية: منع تحديد النصوص */
         * {
             margin: 0;
             padding: 0;
@@ -43,31 +46,23 @@
             min-height: 100vh;
         }
 
-        /* --- الخلفية الثابتة الموحدة لجميع الكورسات --- */
+        /* الخلفية الثابتة الموحدة */
         .page-bg {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://i.pinimg.com/736x/24/fd/82/24fd826a00797d9380f51861632d1643.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-size: cover; background-position: center; background-repeat: no-repeat;
             z-index: -2;
         }
 
         .bg-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(7, 11, 18, 0.9); /* تعتيم ممتاز ومريح للعين لمشاهدة الفيديوهات */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(7, 11, 18, 0.92); /* زيادة التعتيم لعزل مشغل الفيديو */
             z-index: -1;
         }
 
-        /* --- جزيئات الخلفية الطائرة بالـ CSS --- */
+        /* جزيئات الخلفية */
         .particles-container {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -89,163 +84,112 @@
             100% { transform: translateY(0) rotate(360deg); opacity: 0.3; }
         }
 
-        /* شريط التنقل العلوي */
+        /* شريط التنقل */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 8%;
-            background: rgba(7, 11, 18, 0.9);
-            border-bottom: 1px solid var(--glass-border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 8%; background: rgba(7, 11, 18, 0.9);
+            border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 1000;
         }
 
         .logo { font-size: 22px; font-weight: bold; color: var(--neon-blue); }
         .logo span { color: var(--neon-green); }
-
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 13px;
-            transition: 0.3s;
-        }
-
+        .nav-links a { color: var(--text-color); text-decoration: none; font-size: 13px; transition: 0.3s; }
         .nav-links a:hover { color: var(--neon-blue); }
 
-        /* منطقة المحتوى والعنوان */
+        /* حاوية المحتوى */
         .main-container {
-            max-width: 1000px;
-            margin: 40px auto 100px auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
-            text-align: center;
+            max-width: 1000px; margin: 40px auto 100px auto; padding: 0 20px;
+            position: relative; z-index: 2; text-align: center;
         }
 
         .lecture-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 10px;
+            font-size: 2rem; font-weight: 700; margin-bottom: 10px;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
-        .lecture-info {
-            color: #8b949e;
-            font-size: 13px;
-            margin-bottom: 40px;
+        .lecture-info { color: #8b949e; font-size: 13px; margin-bottom: 40px; }
+
+        /* ================= الإطار الخاص الاحترافي المشغل للمنصة ================= */
+        .custom-player-frame {
+            position: relative;
+            background: rgba(13, 20, 34, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 12px; /* مسافة داخلية تصنع إطاراً حول الفيديو */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 
+                        0 0 30px rgba(0, 242, 254, 0.05);
+            transition: 0.4s ease;
         }
 
-        /* --- حاوية الفيديو الاحترافية المشغلة --- */
+        .custom-player-frame:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 
+                        0 0 35px rgba(0, 242, 254, 0.2);
+        }
+
         .video-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* أبعاد الشاشة العريضة 16:9 */
+            padding-bottom: 56.25%; /* أبعاد 16:9 */
             background: #000;
-            border-radius: 20px;
+            border-radius: 16px;
             overflow: hidden;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            transition: 0.3s;
         }
 
-        .video-wrapper:hover {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 25px rgba(0, 242, 254, 0.2);
-        }
-
-        /* الإطار الفعلي للفيديو من يوتيوب */
         .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;
         }
 
-        /* --- واجهة الغلاف الفخمة المخصصة (Poster) --- */
+        /* جدار حماية علوي شفاف لمنع الضغط على شعار يوتيوب العلوي أو اسم الفيديو */
+        .video-secure-shield {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 75px;
+            z-index: 5;
+            background: transparent;
+            pointer-events: auto; /* يلتقط النقر لمنع وصوله لليوتيوب */
+        }
+
+        /* غلاف البداية المخصص (Poster) */
         .video-poster {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('play.png');
-            background-size: cover;
-            background-position: center;
-            z-index: 10; /* تغطي الفيديو بالكامل في البداية */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: opacity 0.5s ease, visibility 0.5s;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('play.png'); background-size: cover; background-position: center;
+            z-index: 10; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: opacity 0.5s ease, visibility 0.5s;
         }
 
-        /* فلتر داكن خفيف فوق الغلاف لجمال الأيقونة */
         .video-poster::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            transition: 0.3s;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); transition: 0.3s;
         }
 
-        .video-poster:hover::before {
-            background: rgba(0, 0, 0, 0.2);
-        }
+        .video-poster:hover::before { background: rgba(0, 0, 0, 0.2); }
 
-        /* زر التشغيل الدائري النيون */
         .play-custom-btn {
-            position: relative;
-            z-index: 11;
-            width: 90px;
-            height: 90px;
-            background: rgba(7, 11, 18, 0.85);
-            border: 2px solid var(--neon-blue);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 35px;
-            color: var(--neon-blue);
-            box-shadow: 0 0 20px var(--neon-blue);
+            position: relative; z-index: 11; width: 85px; height: 85px;
+            background: rgba(7, 11, 18, 0.9); border: 2px solid var(--neon-blue);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            font-size: 30px; color: var(--neon-blue); box-shadow: 0 0 20px var(--neon-blue);
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .video-poster:hover .play-custom-btn {
-            transform: scale(1.15);
-            color: var(--neon-green);
-            border-color: var(--neon-green);
-            box-shadow: 0 0 30px var(--neon-green);
+            transform: scale(1.12); color: var(--neon-green);
+            border-color: var(--neon-green); box-shadow: 0 0 30px var(--neon-green);
         }
 
-        /* إخفاء البوستر بسلاسة عند البدء */
-        .video-poster.hidden-poster {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
+        .video-poster.hidden-poster { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* الفوتر */
-        footer {
-            margin-top: auto;
-            position: relative;
-            background: rgba(7, 11, 18, 0.95);
-            padding: 30px 8% 20px 8%;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            z-index: 2;
-        }
-
+        footer { margin-top: auto; position: relative; background: rgba(7, 11, 18, 0.95); padding: 30px 8% 20px 8%; text-align: center; border-top: 1px solid var(--glass-border); z-index: 2; }
         .copy-right { font-size: 11px; color: #8b949e; }
 
         @media (max-width: 768px) {
-            .lecture-title { font-size: 1.5rem; }
-            .play-custom-btn { width: 70px; height: 70px; font-size: 25px; }
+            .lecture-title { font-size: 1.4rem; }
+            .custom-player-frame { padding: 6px; border-radius: 16px; }
+            .play-custom-btn { width: 65px; height: 65px; font-size: 22px; }
+            .video-secure-shield { height: 50px; }
         }
     </style>
 </head>
@@ -268,24 +212,32 @@
 
     <main class="main-container">
         <h1 class="lecture-title">الباب الأول: مراجعة الدعامة والحركة بالكامل</h1>
-        <p class="lecture-info"><i class="far fa-clock"></i> مدة المحاضرة: 5 ساعات كاملة من الشرح والربط والتحليل الفخم</p>
+        <p class="lecture-info"><i class="far fa-clock"></i> مدة المحاضرة: 5 ساعات كاملة من الشرح والتحليل الفخم</p>
 
-        <div class="video-wrapper" id="player-container">
-            
-            <div class="video-poster" id="poster" onclick="startVideo()">
-                <div class="play-custom-btn">
-                    <i class="fas fa-play"></i>
+        <!-- الإطار الخاص بالمنصة المحيط بالفيديو -->
+        <div class="custom-player-frame" id="player-container">
+            <div class="video-wrapper">
+                
+                <!-- درع الحماية الشفاف المانع لظاهر بيانات اليوتيوب أو النقر عليها علوياً -->
+                <div class="video-secure-shield"></div>
+
+                <!-- غلاف البداية المخصص -->
+                <div class="video-poster" id="poster" onclick="startVideo()">
+                    <div class="play-custom-btn">
+                        <i class="fas fa-play"></i>
+                    </div>
                 </div>
+
+                <!-- تم إضافة modestbranding=1 و showinfo=0 و controls=1 وتعديل روابط المنع لخصوصية كاملة -->
+                <iframe id="lecture-video" 
+                        src="https://www.youtube.com/embed/92y8T3aFKSU?enablejsapi=1&modestbranding=1&rel=0&showinfo=0&controls=1&iv_load_policy=3" 
+                        title="Lecture Player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+
             </div>
-
-            <iframe id="lecture-video" 
-                    src="https://www.youtube.com/embed/92y8T3aFKSU?enablejsapi=1&rel=0&showinfo=0&controls=1" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen>
-            </iframe>
-
         </div>
     </main>
 
@@ -298,53 +250,36 @@
     <script>
         var player;
         
-        // استدعاء وتجهيز الـ YouTube Iframe API للتحكم في التشغيل والإيقاف بالمسطرة والتكبير
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('lecture-video', {
-                events: {
-                    'onReady': onPlayerReady
-                }
+                events: { 'onReady': onPlayerReady }
             });
         }
 
-        // تحميل السكربت الرسمي من جوجل يوتيوب ديناميكياً لضمان سلامة التايم لاين والـ API
         var tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-        function onPlayerReady(event) {
-            // المشغل جاهز للتحكم
-        }
+        function onPlayerReady(event) {}
 
-        // دالة تشغيل الفيديو عند الضغط على البوستر المخصص
         function startVideo() {
             document.getElementById('poster').classList.add('hidden-poster');
-            if (player && player.playVideo) {
-                player.playVideo();
-            }
+            if (player && player.playVideo) { player.playVideo(); }
         }
 
-        // 1. التحكم بـ زر المسطرة (Spacebar) للتشغيل والإيقاف المؤقت للكمبيوتر
+        // التحكم بـ زر المسطرة (Spacebar) للتشغيل والإيقاف المؤقت للكمبيوتر
         window.addEventListener('keydown', function(e) {
             if (e.code === 'Space' || e.keyCode === 32) {
-                e.preventDefault(); // منع نزول الشاشة لأسفل عند الضغط على المسطرة
-                
-                // التأكد من أن الطالب قام بفتح الفيديو أولاً واختفى البوستر
+                e.preventDefault(); 
                 if(document.getElementById('poster').classList.contains('hidden-poster') && player) {
                     var state = player.getPlayerState();
-                    if (state === 1) { // 1 تعني أن الفيديو يشتغل حالياً
-                        player.pauseVideo();
-                    } else {
-                        player.playVideo();
-                    }
-                } else {
-                    startVideo(); // تشغيل فوري إذا كان البوستر لسه موجود
-                }
+                    if (state === 1) { player.pauseVideo(); } else { player.playVideo(); }
+                } else { startVideo(); }
             }
         });
 
-        // 2. النقر المزدوج من الكمبيوتر لتكبير الشاشة بالكامل (Fullscreen) للمشغل
+        // النقر المزدوج لتكبير الإطار المخصص كاملاً لملء الشاشة
         var container = document.getElementById('player-container');
         container.addEventListener('dblclick', function() {
             if (!document.fullscreenElement) {
@@ -357,43 +292,15 @@
             }
         });
 
-
-        // ================== نظام الحماية الفولاذي لـ مـنصـتـك ==================
-
-        // أ. منع فتح القائمة عند الضغط على زر الفأرة الأيمن (Right-Click)
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // ب. منع اختصارات لوحة المفاتيح الخاصة بأدوات المطورين وكشف السورس كود
+        // === نظام الحماية الفولاذي المانع لـ الفحص والـنسخ ===
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
-            // منع F12
-            if (e.keyCode === 123) {
-                e.preventDefault();
-                return false;
-            }
-            // منع Ctrl + Shift + I (أدوات الفحص)
-            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.code === 'KeyI')) {
-                e.preventDefault();
-                return false;
-            }
-            // منع Ctrl + Shift + J (الكونسول)
-            if (e.ctrlKey && e.shiftKey && (e.keyCode === 74 || e.code === 'KeyJ')) {
-                e.preventDefault();
-                return false;
-            }
-            // منع Ctrl + Shift + C (العنصر المحدد)
-            if (e.ctrlKey && e.shiftKey && (e.keyCode === 67 || e.code === 'KeyC')) {
-                e.preventDefault();
-                return false;
-            }
-            // منع Ctrl + U (عرض السورس كود الأساسي للصفحة)
-            if (e.ctrlKey && (e.keyCode === 85 || e.code === 'KeyU')) {
-                e.preventDefault();
-                return false;
-            }
+            if (e.keyCode === 123) { e.preventDefault(); return false; }
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.code === 'KeyI')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 74 || e.code === 'KeyJ')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 67 || e.code === 'KeyC')) { e.preventDefault(); return false; }
+            if (e.ctrlKey && (e.keyCode === 85 || e.code === 'KeyU')) { e.preventDefault(); return false; }
         });
     </script>
-
 </body>
 </html>
